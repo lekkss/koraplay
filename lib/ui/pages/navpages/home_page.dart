@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:koraplay/ui/shared/app_colors.dart';
 import 'package:koraplay/ui/shared/ui_helpers.dart';
+import 'package:koraplay/ui/widget/doctor_card.dart';
 import 'package:koraplay/ui/widget/header.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+  List<int> items = List<int>.generate(2, (int index) => index);
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,18 @@ class HomePage extends StatelessWidget {
             const Header(text: "Category"),
             verticalSpaceLarge,
             const Header(text: "Top Rated Doctors"),
+            DoctorCard(),
+            Container(
+              height: 200,
+              child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Dismissible(
+                        background: Icon(Icons.message),
+                        key: ValueKey<int>(items[index]),
+                        child: const DoctorCard());
+                  }),
+            )
           ],
         ),
       ),
