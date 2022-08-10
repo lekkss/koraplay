@@ -33,10 +33,8 @@ class _MainPageState extends State<MainPage> {
       body: pages[currentIndex],
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
           child: BottomNavigationBar(
             unselectedFontSize: 0,
             selectedFontSize: 0,

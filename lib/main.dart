@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koraplay/models/category_model.dart';
 import 'package:koraplay/models/onboard_model.dart';
 import 'package:koraplay/ui/pages/main_page.dart';
 import 'package:koraplay/ui/pages/welcome_page.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) => OnboardItemsModel()),
+        ChangeNotifierProvider(create: (ctx) => CategoryModal()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
