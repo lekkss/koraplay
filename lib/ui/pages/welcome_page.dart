@@ -10,10 +10,12 @@ class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _WelcomePageState createState() => _WelcomePageState();
 }
 
 final _controller = PageController();
+// ignore: unused_element
 int _currentPage = 0;
 
 class _WelcomePageState extends State<WelcomePage> {
@@ -69,8 +71,9 @@ class _WelcomePageState extends State<WelcomePage> {
                     );
                   }),
                 ),
-                verticalSpaceMedium,
+                const Spacer(),
                 ResponsiveButton(
+                  text: "Get Started",
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/mainPage');
                   },

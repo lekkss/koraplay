@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:koraplay/ui/shared/app_colors.dart';
 import 'package:koraplay/ui/shared/ui_helpers.dart';
+import 'package:koraplay/ui/widget/app_text.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({Key? key}) : super(key: key);
+  final String id;
+  final String occupation;
+  final String image;
+  final String name;
+  final double rating;
+  final String time;
+  const DoctorCard(
+      {Key? key,
+      required this.id,
+      required this.occupation,
+      required this.image,
+      required this.name,
+      required this.rating,
+      required this.time})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +35,36 @@ class DoctorCard extends StatelessWidget {
                   color: Colors.black, borderRadius: BorderRadius.circular(10)),
               height: 75,
               width: 75,
-              child: Image.asset("img/one.png"),
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
             ),
             horizontalSpaceSmall,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Dr. Ronald Richard"),
+                AppText(
+                  text: name,
+                  fontWeight: FontWeight.bold,
+                ),
                 verticalSpaceTiny,
-                const Text("Dental/Specialist"),
+                AppText(
+                  text: occupation,
+                  size: 15,
+                  color: Colors.grey,
+                ),
                 verticalSpaceTiny,
                 Row(
-                  children: const [
-                    Icon(Icons.star),
-                    Text("4.3"),
-                    Text("4.3"),
-                    Icon(Icons.lock_clock),
-                    Text("11am - 03pm"),
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    Text(rating.toString()),
+                    horizontalSpaceSmall,
+                    const Icon(Icons.lock_clock),
+                    Text(time),
                   ],
                 )
               ],

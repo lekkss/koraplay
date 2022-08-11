@@ -9,7 +9,7 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryData = Provider.of<CategoryModal>(context, listen: false);
+    final categoryData = Provider.of<CategoryModel>(context, listen: false);
     return SizedBox(
       height: 50,
       child: ListView.builder(

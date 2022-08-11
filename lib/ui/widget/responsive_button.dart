@@ -5,8 +5,10 @@ class ResponsiveButton extends StatelessWidget {
   final bool? isResponsive;
   final double? width;
   final void Function()? onPressed;
+  final String? text;
   const ResponsiveButton({
     Key? key,
+    this.text,
     this.isResponsive = false,
     this.width = 120,
     this.onPressed,
@@ -34,14 +36,14 @@ class ResponsiveButton extends StatelessWidget {
                       margin: const EdgeInsets.only(
                         left: 20,
                       ),
-                      child: const AppText(
-                        text: "Get Started",
+                      child: AppText(
+                        text: text!,
                         color: Colors.white,
                       ),
                     )
                   : Container(
-                      child: const AppText(
-                        text: "Get Started",
+                      child: AppText(
+                        text: text!,
                         color: Colors.white,
                       ),
                     ),

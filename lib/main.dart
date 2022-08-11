@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:koraplay/models/category_model.dart';
+import 'package:koraplay/models/doctor_model.dart';
 import 'package:koraplay/models/onboard_model.dart';
+// import 'package:koraplay/ui/pages/details_page.dart';
 import 'package:koraplay/ui/pages/main_page.dart';
 import 'package:koraplay/ui/pages/welcome_page.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) => OnboardItemsModel()),
-        ChangeNotifierProvider(create: (ctx) => CategoryModal()),
+        ChangeNotifierProvider(create: (ctx) => CategoryModel()),
+        ChangeNotifierProvider(create: (ctx) => DoctorModel()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => const WelcomePage(),
             '/mainPage': (context) => const MainPage(),
+            // '/detailsPage': (context) =>  DetailsPage(data: ,),
           }),
     );
   }

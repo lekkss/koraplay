@@ -12,7 +12,7 @@ class Category {
   });
 }
 
-class CategoryModal with ChangeNotifier {
+class CategoryModel with ChangeNotifier {
   final List<Category> _items = [
     Category(
       icon: (Icons.favorite),

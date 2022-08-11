@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:koraplay/models/doctor_model.dart';
+import 'package:koraplay/ui/pages/details_page.dart';
 import 'package:koraplay/ui/shared/app_colors.dart';
 import 'package:koraplay/ui/shared/ui_helpers.dart';
 import 'package:koraplay/ui/widget/category_list.dart';
@@ -6,6 +8,7 @@ import 'package:koraplay/ui/widget/doctor_card.dart';
 import 'package:koraplay/ui/widget/header.dart';
 import 'package:koraplay/ui/widget/input.dart';
 import 'package:koraplay/ui/widget/upcoming_card.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -13,6 +16,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final doctorData = Provider.of<DoctorModel>(context, listen: false);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -99,42 +104,67 @@ class HomePage extends StatelessWidget {
                   removeBottom: true,
                   context: context,
                   child: ListView.builder(
-                      itemCount: items.length,
+                      itemCount: doctorData.items.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: Dismissible(
-                              background: Container(
-                                color: Colors.blue,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.favorite, color: Colors.white),
-                                      Text('Move to favorites',
-                                          style:
-                                              TextStyle(color: Colors.white)),
-                                    ],
+                        final data = doctorData.items[index];
+
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (contex) =>
+                                        DetailsPage(data: data)));
+                            // Navigator.pushReplacementNamed(
+                            //     context, '/detailsPage');
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: Dismissible(
+                                onDismissed: (DismissDirection dismiss) {
+                                  debugPrint("Dismissed");
+                                },
+                                background: Container(
+                                  color: Colors.blue,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Row(
+                                      children: const [
+                                        Icon(Icons.favorite,
+                                            color: Colors.white),
+                                        Text(
+                                          'Move to favorites',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              secondaryBackground: Container(
-                                decoration: BoxDecoration(
-                                    color: primaryColor,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: const [
-                                      Icon(Icons.message_sharp,
-                                          color: Colors.white),
-                                    ],
+                                secondaryBackground: Container(
+                                  decoration: BoxDecoration(
+                                      color: primaryColor,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: const [
+                                        Icon(Icons.message_sharp,
+                                            color: Colors.white),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              key: ValueKey<int>(items[index]),
-                              child: const DoctorCard()),
+                                key: ValueKey<String>(data.id),
+                                child: DoctorCard(
+                                  time: data.time,
+                                  name: data.name,
+                                  id: data.id,
+                                  image: data.image,
+                                  occupation: data.occupation,
+                                  rating: data.rating,
+                                )),
+                          ),
                         );
                       }),
                 ),
