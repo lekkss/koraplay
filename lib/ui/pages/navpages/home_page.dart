@@ -18,159 +18,156 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final doctorData = Provider.of<DoctorModel>(context, listen: false);
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(left: 18, right: 18, bottom: 20, top: 50),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        backgroundColor: primaryColor,
-                      ),
-                      horizontalSpaceSmall,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text("welcome back"),
-                          Text(
-                            "lekkss",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w800),
-                          ),
-                        ],
-                      )
-                    ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding:
+            const EdgeInsets.only(left: 18, right: 18, bottom: 20, top: 50),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      backgroundColor: primaryColor,
+                    ),
+                    horizontalSpaceSmall,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text("welcome back"),
+                        Text(
+                          "lekkss",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w800),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: secondaryColor),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.menu),
                   ),
-                  Container(
+                )
+              ],
+            ),
+            verticalSpaceLarge,
+            const Header(text: "UpComing Appointments"),
+            verticalSpaceSmall,
+            const UncomingCard(),
+            verticalSpaceSmall,
+            Row(
+              children: [
+                const Expanded(
+                    flex: 5,
+                    child: Input(
+                      hintText: "Search...",
+                      borderRadius: 10,
+                      filled: true,
+                      fillColor: secondaryColor,
+                      prefixIcon: Icon(Icons.search_rounded),
+                    )),
+                horizontalSpaceMedium,
+                Expanded(
+                  child: Container(
+                    height: 50,
+                    width: 50,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: secondaryColor),
+                        color: primaryColor),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Icon(Icons.menu),
                     ),
-                  )
-                ],
-              ),
-              verticalSpaceLarge,
-              const Header(text: "UpComing Appointments"),
-              verticalSpaceSmall,
-              const UncomingCard(),
-              verticalSpaceSmall,
-              Row(
-                children: [
-                  const Expanded(
-                      flex: 5,
-                      child: Input(
-                        hintText: "Search...",
-                        borderRadius: 10,
-                        filled: true,
-                        fillColor: secondaryColor,
-                        prefixIcon: Icon(Icons.search_rounded),
-                      )),
-                  horizontalSpaceMedium,
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: primaryColor),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.menu),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              verticalSpaceSmall,
-              const Header(text: "Category"),
-              verticalSpaceSmall,
-              const CategoryList(),
-              verticalSpaceSmall,
-              const Header(text: "Top Rated Doctors"),
-              verticalSpaceSmall,
-              SizedBox(
-                height: 220,
-                child: MediaQuery.removePadding(
-                  removeTop: true,
-                  removeBottom: true,
-                  context: context,
-                  child: ListView.builder(
-                      itemCount: doctorData.items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final data = doctorData.items[index];
+                  ),
+                )
+              ],
+            ),
+            verticalSpaceSmall,
+            const Header(text: "Category"),
+            verticalSpaceSmall,
+            const CategoryList(),
+            verticalSpaceSmall,
+            const Header(text: "Top Rated Doctors"),
+            verticalSpaceSmall,
+            SizedBox(
+              height: 220,
+              child: MediaQuery.removePadding(
+                removeTop: true,
+                removeBottom: true,
+                context: context,
+                child: ListView.builder(
+                    itemCount: doctorData.items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final data = doctorData.items[index];
 
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (contex) =>
-                                        DetailsPage(data: data)));
-                            // Navigator.pushReplacementNamed(
-                            //     context, '/detailsPage');
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10.0),
-                            child: Dismissible(
-                                onDismissed: (DismissDirection dismiss) {
-                                  debugPrint("Dismissed");
-                                },
-                                background: Container(
-                                  color: Colors.blue,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Row(
-                                      children: const [
-                                        Icon(Icons.favorite,
-                                            color: Colors.white),
-                                        Text(
-                                          'Move to favorites',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (contex) =>
+                                      DetailsPage(data: data)));
+                          // Navigator.pushReplacementNamed(
+                          //     context, '/detailsPage');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Dismissible(
+                              confirmDismiss: (direction) async {
+                                return null;
+                              },
+                              background: Container(
+                                color: Colors.blue,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Row(
+                                    children: const [
+                                      Icon(Icons.favorite, color: Colors.white),
+                                      Text(
+                                        'Move to favorites',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                secondaryBackground: Container(
-                                  decoration: BoxDecoration(
-                                      color: primaryColor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: const [
-                                        Icon(Icons.message_sharp,
-                                            color: Colors.white),
-                                      ],
-                                    ),
+                              ),
+                              secondaryBackground: Container(
+                                decoration: BoxDecoration(
+                                    color: primaryColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: const [
+                                      Icon(Icons.message_sharp,
+                                          color: Colors.white),
+                                    ],
                                   ),
                                 ),
-                                key: ValueKey<String>(data.id),
-                                child: DoctorCard(
-                                  time: data.time,
-                                  name: data.name,
-                                  id: data.id,
-                                  image: data.image,
-                                  occupation: data.occupation,
-                                  rating: data.rating,
-                                )),
-                          ),
-                        );
-                      }),
-                ),
-              )
-            ],
-          ),
+                              ),
+                              key: ValueKey<String>(data.id),
+                              child: DoctorCard(
+                                time: data.time,
+                                name: data.name,
+                                id: data.id,
+                                image: data.image,
+                                occupation: data.occupation,
+                                rating: data.rating,
+                              )),
+                        ),
+                      );
+                    }),
+              ),
+            )
+          ],
         ),
       ),
     );
