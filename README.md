@@ -1,6 +1,6 @@
 # koraplay
 
-A new Flutter project.
+The apk file can bbe found in the apk_file folder
 
 ## Getting Started
 
